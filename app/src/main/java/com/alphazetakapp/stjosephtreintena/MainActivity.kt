@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = MaterialTheme.colors.background
                 ) {
+                    val s = "hola"
                     AppNavigation()
                 }
             }
