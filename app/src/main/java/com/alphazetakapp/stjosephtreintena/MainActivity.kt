@@ -26,15 +26,14 @@ import com.alphazetakapp.stjosephtreintena.ui.theme.StjosephtreintenaTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Este sería el tema de arranque
+        setTheme(R.style.Theme_App_Starting)
+
         setContent {
             StjosephtreintenaTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    color = MaterialTheme.colors.background
-                ) {
-                    val s = "hola"
-                    AppNavigation()
-                }
+                val screenSplash = installSplashScreen()
+                AppNavigation(screenSplash)
             }
         }
     }

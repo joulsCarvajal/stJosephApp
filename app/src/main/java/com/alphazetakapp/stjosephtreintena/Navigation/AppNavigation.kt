@@ -1,5 +1,7 @@
 package com.alphazetakapp.stjosephtreintena.Navigation
 
+import android.os.Handler
+import android.os.Looper
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen
@@ -11,15 +13,26 @@ import com.alphazetakapp.stjosephtreintena.*
 import com.alphazetakapp.stjosephtreintena.ReadMeditationScreen.MeditationScreenViewModel
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(screenSplash: SplashScreen) {
     val navigationController = rememberNavController()
+
+    // Configura el SplashScreen
+    /*screenSplash.setOnExitAnimationListener { splashScreen ->
+        // Realiza acciones cuando el SplashScreen se cierra, si es necesario
+        // Por ejemplo, puedes realizar alguna animación de transición aquí
+
+        // Después de realizar cualquier acción necesaria, navega a la pantalla MainScreen
+//        val context = LocalContext.current
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            navigationController.navigate(Routes.SplashScreen.routes)
+        }, 5000) // Espera un segundo antes de navegar a la siguiente pantalla
+    }*/
+
     NavHost(
         navController = navigationController,
-        startDestination = Routes.SplashScreen.routes
+        startDestination = Routes.MainScreen.routes
     ) {
-        composable(Routes.SplashScreen.routes) {
-            SplashScreen(navigationController)
-        }
         composable(Routes.MainScreen.routes) {
             val context = LocalContext.current
             MainScreen(navigationController, context = context)
