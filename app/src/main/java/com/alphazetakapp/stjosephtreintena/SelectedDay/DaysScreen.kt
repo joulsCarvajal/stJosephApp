@@ -4,7 +4,16 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
@@ -40,78 +49,63 @@ fun DaysScreen(navController: NavController) {
 
 @Composable
 fun MeditationCardView(navController: NavController) {
+    val backColor = colorResource(id = R.color.backgroundColorApp)
     LazyColumn {
         items(getMeditationDays()) { meditationday ->
-            PaintCard(
-                meditationday = meditationday,
-                dayNum = meditationday.dayNum,
-                dailyRecord = meditationday.dailyRecord,
-                navController
-            )
-
-        }
-    }
-}
-
-@Composable
-fun PaintCard(
-    meditationday: MeditationCardDay,
-    dayNum: Int,
-    dailyRecord: Int,
-    navController: NavController
-) {
-    val backColor = colorResource(id = R.color.backgroundColorApp)
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                navController.navigate(
-                    Routes.MeditationScreen.createRoute(
-                        dayNum,
-                        meditationday.day,
-                        dailyRecord
-                    )
-                )
-            },
-        border = BorderStroke(2.dp, Color.LightGray)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(backColor),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = meditationday.photo),
-                contentDescription = "Image",
+            Card(
                 modifier = Modifier
-                    .size(80.dp)
-                    .padding(start = 8.dp),
-                alignment = Alignment.CenterStart
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = meditationday.day,
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.Cursive,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.size(4.dp))
-                Text(
-                    text = meditationday.meditationDay,
-                    fontSize = 12.sp,
-                    textAlign = TextAlign.Center,
+                    .fillMaxWidth()
+                    .clickable {
+                        navController.navigate(
+                            Routes.MeditationScreen.createRoute(
+                                dayNum = meditationday.dayNum,
+                                meditationday.day,
+                                dailyRecord = meditationday.dailyRecord
+                            )
+                        )
+                    },
+                border = BorderStroke(2.dp, Color.LightGray)
+            ) {
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(end = 18.dp)
-                        .padding(bottom = 4.dp),
-                    color = Color.White
-                )
+                        .background(backColor),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(id = meditationday.photo),
+                        contentDescription = "Image",
+                        modifier = Modifier
+                            .size(80.dp)
+                            .padding(start = 8.dp),
+                        alignment = Alignment.CenterStart
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            text = meditationday.day,
+                            fontSize = 32.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Cursive,
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.size(4.dp))
+                        Text(
+                            text = meditationday.meditationDay,
+                            fontSize = 12.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(end = 18.dp)
+                                .padding(bottom = 4.dp),
+                            color = Color.White
+                        )
+                    }
+                }
             }
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }

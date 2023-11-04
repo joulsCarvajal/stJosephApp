@@ -10,10 +10,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.alphazetakapp.stjosephtreintena.*
-import com.alphazetakapp.stjosephtreintena.ReadMeditationScreen.MeditationScreenViewModel
 
 @Composable
-fun AppNavigation(screenSplash: SplashScreen) {
+fun AppNavigation() {
     val navigationController = rememberNavController()
 
     // Configura el SplashScreen
